@@ -1,0 +1,27 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Strona Główna{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Funkcjonalności Serwisu Zgłoszenia Udziału</h1>
+  <p class="lead text-muted">
+    Aplikacja została zaprojektowana z myślą o szybkiej rejestracji i integracji systemów. Oto główne możliwości, jakie oferuje:
+  </p>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Rejestracja Konta:</strong> Intuicyjny formularz umożliwiający zgłoszenie udziału poprzez rejestracje.
+    </li>
+    <li class="list-group-item">
+      <strong>Monitorowanie Statusu Wniosku:</strong> Użytkownicy mogą na bieżąco sprawdzać, czy ich zgłoszenie zostało zatwierdzone.
+    </li>
+    <li class="list-group-item">
+      <strong>Dostęp do Klucza API:</strong> Po zatwierdzeniu zgłoszenia, system generuje unikalny klucz API, który umożliwia integrację z innymi aplikacjami.
+    </li>
+    <li class="list-group-item">
+      <strong>Elastyczne Logowanie:</strong> Możliwość logowania zarówno za pomocą username, jak i numeru NIP, co zwiększa wygodę korzystania.
+    </li>
+    <li class="list-group-item">
+      <strong>Bezpieczeństwo Sesji:</strong> Automatyczne wylogowywanie po określonym czasie bezczynności chroni Twoje dane.
+    </li>
+  </ul>
+{% endblock %}

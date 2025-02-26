@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl" class="h-100">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}SERWIS ZGŁOSZENIA UDZIAŁU{% endblock %}</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="h-100 m-0 p-0">
+  <!-- Główny kontener rozciągający się na 100% wysokości okna -->
+  <div class="container-fluid h-100">
+    <div class="row h-100 no-gutters">
+      
+      <!-- Lewa kolumna (menu) - 30% szerokości -->
+      <nav 
+        class="d-none d-md-flex flex-column p-4 h-100 shadow" 
+        style="
+          flex: 0 0 30%;
+          max-width: 30%;
+          background: linear-gradient(180deg, #cccccc 0%, #7992f6 80%);
+        "
+      >
+        <div class="flex-grow-1 d-flex flex-column justify-content-around align-items-stretch">
+          <h3 class=" mb-4">SERWIS ZGŁOSZENIA UDZIAŁU</h3>
+          
+          <!-- Rejestracja konta – zawsze aktywny -->
+          <a 
+            class="btn btn-outline-dark w-100 mb-3" 
+            style="font-size: 1.25rem;" 
+            href="{% url 'apply' %}"
+          >
+            Rejestracja konta
+          </a>
+          
+          {% if user.is_authenticated %}
+            {% with collab=user.collaborator %}
+              <!-- Przycisk "Sprawdź status" - zawsze aktywny -->
+              <a class="btn btn-outline-dark w-100 mb-3" style="font-size: 1.25rem;" href="{% url 'status' %}">
+                Sprawdź status
+              </a>
+              
+              <!-- Przycisk "View API Key" - wyłączony, gdy status nie Approved lub gdy użytkownik jest administratorem -->
+              {% if collab.status != "Approved" or user.is_superuser %}
+                <a class="btn btn-outline-dark w-100 mb-3 disabled" style="font-size: 1.25rem;" href="javascript:void(0)">
+                  View API Key
+                </a>
+              {% else %}
+                <a class="btn btn-outline-dark w-100 mb-3" style="font-size: 1.25rem;" href="{% url 'api_key' %}">
+                  View API Key
+                </a>
+              {% endif %}
+            {% endwith %}
+          {% else %}
+            <!-- Jeśli użytkownik nie jest zalogowany -->
+            <a class="btn btn-outline-dark w-100" style="font-size: 1.25rem;" href="{% url 'login' %}">
+              Login
+            </a>
+          {% endif %}
+          
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" class="m-0">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-dark w-100" style="font-size: 1.25rem;">
+                Logout
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      </nav>
+      
+      <!-- Menu mobilne (widoczne tylko na małych ekranach) -->
+      <nav class="col-12 d-md-none shadow" style="background: linear-gradient(180deg, #cccccc 0%, #eeeeee 100%);">
+        <div class="p-3">
+          <h3>(Menu mobilne 404)</h3>
+        </div>
+      </nav>
+      
+      <!-- Główna część - 70% szerokości -->
+      <main 
+        class="h-100" 
+        style="flex: 0 0 70%; max-width: 70%; background-color: #f9f9f9;"
+      >
+        <div class="p-5">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS (opcjonalnie, jeśli potrzebujesz interakcji) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

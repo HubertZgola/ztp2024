@@ -1,0 +1,17 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Klucz API{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Your API Key</h1>
+{% if collaborator.status == 'Approved' %}
+    <p class="lead">Here is your API key for integration purposes:</p>
+    <div class="alert alert-info" role="alert">
+        {{ collaborator.api_key }}
+    </div>
+{% else %}
+    <div class="alert alert-warning" role="alert">
+        Your application has not been approved yet.
+    </div>
+{% endif %}
+{% endblock %}
