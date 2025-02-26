@@ -2,7 +2,7 @@
 ## Projekt zaliczeniowy
 
 ```
-pip install -r szu/requirements.txt
+pip install -r requirements.txt
 ```
 
 ```
