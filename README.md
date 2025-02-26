@@ -20,3 +20,7 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+```
+docker exec -it postgres psql -U postgres -d ztp2024
+```
