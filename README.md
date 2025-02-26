@@ -1,3 +1,6 @@
+# Zaawansowane Techniki Programowania 2024
+## Projekt zaliczeniowy
+
 ```
 pip install -r szu/requirements.txt
 ```
